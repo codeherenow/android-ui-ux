@@ -13,7 +13,6 @@
  */
 package com.codeherenow.circularprogressbar;
 
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -49,12 +48,9 @@ public class CircularProgressBar extends View {
     private int mTextColor;
     private int mBarBackgroundColor;
     private int mBarForegroundColor;
-    private int mBarSuppliedForegroundColor = -1;
 
     // Animation
     private ValueAnimator mValueAnimator;
-    private ValueAnimator mColorAnimator;
-    private ColorSupplier mColorSupplier;
 
     /*
      * We need to override at least one of the constructors. Here, we override the simplest of all.
@@ -116,8 +112,7 @@ public class CircularProgressBar extends View {
         canvas.drawArc(mCircleBounds, 0, 360, false, mPaint);
 
         // Foreground
-        mPaint.setColor(mColorSupplier == null
-                ? mBarForegroundColor : mBarSuppliedForegroundColor);
+        mPaint.setColor(mBarForegroundColor);
         float sweepAngle = mValue / MAX_VALUE * 360;
         canvas.drawArc(mCircleBounds, 0, sweepAngle, false, mPaint);
 
@@ -175,24 +170,6 @@ public class CircularProgressBar extends View {
         startAnimation(value);
     }
 
-    /*
-     * Set a color supplier instance that would get colors for the given value.
-     */
-    public void setColorSupplier(ColorSupplier colorSupplier) {
-        if (colorSupplier != null && mColorAnimator == null) {
-            mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
-                    mBarForegroundColor, colorSupplier.getColor(mValue));
-            mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
-                }
-            });
-        }
-        this.mColorSupplier = colorSupplier;
-    }
-
     private void obtainXmlAttributes(Context context, AttributeSet attributeSet) {
         if (attributeSet != null) {
             TypedArray typedArray = null;
@@ -219,28 +196,7 @@ public class CircularProgressBar extends View {
         if (mValueAnimator.isRunning()) {
             mValueAnimator.cancel();
         }
-        if (mColorAnimator != null && mColorAnimator.isRunning()) {
-            mColorAnimator.cancel();
-        }
-
-        // Start value animator
         mValueAnimator.setFloatValues(mValue, value);
         mValueAnimator.start();
-
-        // Start color animator
-        if (mColorSupplier != null) {
-            int startColor = mBarSuppliedForegroundColor != -1
-                    ? mBarSuppliedForegroundColor : mBarForegroundColor;
-            int endColor = mColorSupplier.getColor(value);
-            mColorAnimator.setIntValues(startColor, endColor);
-            mColorAnimator.start();
-        }
-    }
-
-    /**
-     * Implement this interface to supply colors for your values.
-     */
-    public interface ColorSupplier {
-        int getColor(float value);
     }
 }
