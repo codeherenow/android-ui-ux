@@ -22,7 +22,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
@@ -73,7 +72,6 @@ public class CircularProgressBar extends View {
         // Animation
         mValueAnimator = ValueAnimator.ofFloat(0, mValue);
         mValueAnimator.setDuration(ANIMATION_DURATION);
-        mValueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override

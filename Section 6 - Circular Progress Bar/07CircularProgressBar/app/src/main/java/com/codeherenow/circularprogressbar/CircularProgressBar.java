@@ -31,6 +31,7 @@ public class CircularProgressBar extends View {
     private static final float TEXT_SIZE_RATIO = 0.30f;
     private static final int COLOR_DEFAULT_BACKGROUND = 0xffababab;
     private static final int COLOR_DEFAULT_FOREGROUND = 0xff6a8afe;
+    private static final float MAX_VALUE = 100;
 
     // Attributes
     private float mStrokeThickness;
@@ -40,7 +41,6 @@ public class CircularProgressBar extends View {
     private Paint mPaint;
 
     private float mValue;
-    private float mMaxValue;
 
     /*
      * We need to override at least one of the constructors. Here, we override the simplest of all.
@@ -63,8 +63,6 @@ public class CircularProgressBar extends View {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setTextAlign(Paint.Align.CENTER);
-
-        mMaxValue = 100;
     }
 
     /*
@@ -83,7 +81,7 @@ public class CircularProgressBar extends View {
 
         // Foreground
         mPaint.setColor(COLOR_DEFAULT_FOREGROUND);
-        float sweepAngle = mValue / mMaxValue * 360;
+        float sweepAngle = mValue / MAX_VALUE * 360;
         canvas.drawArc(mCircleBounds, 0, sweepAngle, false, mPaint);
 
         // Text
@@ -127,18 +125,6 @@ public class CircularProgressBar extends View {
 
         // Text Size
         mTextSize = minDimension * TEXT_SIZE_RATIO;
-    }
-
-    public float getMaxValue() {
-        return mMaxValue;
-    }
-
-    /*
-     * Call invalidate() to redraw the view. We do this when the max value changes.
-     */
-    public void setMaxValue(float maxValue) {
-        this.mMaxValue = maxValue;
-        invalidate();
     }
 
     public float getValue() {
