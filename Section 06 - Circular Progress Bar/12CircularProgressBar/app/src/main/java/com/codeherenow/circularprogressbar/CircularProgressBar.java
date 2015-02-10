@@ -83,25 +83,7 @@ public class CircularProgressBar extends View {
         obtainXmlAttributes(context, attributeSet);
 
         // Animation
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            mValueAnimator = ValueAnimator.ofFloat(0, mValue);
-
-        /*
-         * The interpolator takes care of the changing values against the given time
-         * interval.
-         */
-            mValueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-
-            mValueAnimator.setDuration(ANIMATION_DURATION);
-            mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mValue = (float) animation.getAnimatedValue();
-                    invalidate();
-                }
-            });
-        }
+        initProgressValueAnimator();
     }
 
     /*
@@ -190,17 +172,7 @@ public class CircularProgressBar extends View {
      */
     public void setColorSupplier(ColorSupplier colorSupplier) {
         if (colorSupplier != null && mColorAnimator == null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
-                        mBarForegroundColor, colorSupplier.getColor(mValue));
-                mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
-                    }
-                });
-            }
+            initColorAnimator(colorSupplier);
         }
         this.mColorSupplier = colorSupplier;
     }
@@ -224,6 +196,42 @@ public class CircularProgressBar extends View {
                     typedArray.recycle();
                 }
             }
+        }
+    }
+
+    private void initProgressValueAnimator() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mValueAnimator = ValueAnimator.ofFloat(0, mValue);
+
+            /*
+             * The interpolator takes care of the changing values against the given time
+             * interval.
+             */
+            mValueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+
+            mValueAnimator.setDuration(ANIMATION_DURATION);
+            mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mValue = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+        }
+    }
+
+    private void initColorAnimator(ColorSupplier colorSupplier) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
+                    mBarForegroundColor, colorSupplier.getColor(mValue));
+            mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
+                }
+            });
         }
     }
 
