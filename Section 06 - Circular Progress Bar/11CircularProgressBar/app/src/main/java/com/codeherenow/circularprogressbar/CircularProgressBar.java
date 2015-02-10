@@ -238,7 +238,7 @@ public class CircularProgressBar extends View {
     }
 
     /**
-     * Implement this interface to supply colors for your values.
+     * Implement this interface to supply colors based on your values.
      */
     public interface ColorSupplier {
         int getColor(float value);
