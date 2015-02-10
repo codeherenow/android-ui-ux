@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -82,23 +83,25 @@ public class CircularProgressBar extends View {
         obtainXmlAttributes(context, attributeSet);
 
         // Animation
-        mValueAnimator = ValueAnimator.ofFloat(0, mValue);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mValueAnimator = ValueAnimator.ofFloat(0, mValue);
 
         /*
          * The interpolator takes care of the changing values against the given time
          * interval.
          */
-        mValueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+            mValueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        mValueAnimator.setDuration(ANIMATION_DURATION);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            mValueAnimator.setDuration(ANIMATION_DURATION);
+            mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mValue = (float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mValue = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+        }
     }
 
     /*
@@ -172,7 +175,14 @@ public class CircularProgressBar extends View {
      * Animate values using the value animator.
      */
     public void setValue(float value) {
-        startAnimation(value);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            startAnimation(value);
+        } else {
+            mValue = value;
+            mBarSuppliedForegroundColor = mColorSupplier != null
+                    ? mColorSupplier.getColor(value) : mBarSuppliedForegroundColor;
+            invalidate();
+        }
     }
 
     /*
@@ -180,15 +190,17 @@ public class CircularProgressBar extends View {
      */
     public void setColorSupplier(ColorSupplier colorSupplier) {
         if (colorSupplier != null && mColorAnimator == null) {
-            mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
-                    mBarForegroundColor, colorSupplier.getColor(mValue));
-            mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
+                        mBarForegroundColor, colorSupplier.getColor(mValue));
+                mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
-                }
-            });
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
+                    }
+                });
+            }
         }
         this.mColorSupplier = colorSupplier;
     }
