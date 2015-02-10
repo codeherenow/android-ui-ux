@@ -28,8 +28,8 @@ import android.view.View;
  */
 public class CircularProgressBar extends View {
     // Constants
-    private static final float STROKE_THICKNESS_RATIO = 0.075f;
-    private static final float TEXT_SIZE_RATIO = 0.30f;
+    private static final float STROKE_THICKNESS_FRACTION = 0.075f;
+    private static final float TEXT_SIZE_FRACTION = 0.30f;
     private static final int COLOR_DEFAULT_BACKGROUND = 0xffababab;
     private static final int COLOR_DEFAULT_FOREGROUND = 0xff6a8afe;
     private static final float MAX_VALUE = 100;
@@ -126,7 +126,7 @@ public class CircularProgressBar extends View {
 
         // Stroke Width
         int minDimension = Math.min(w, h);
-        mStrokeThickness = minDimension * STROKE_THICKNESS_RATIO;
+        mStrokeThickness = minDimension * STROKE_THICKNESS_FRACTION;
 
         // Square
         float boundingSquareSide = minDimension - mStrokeThickness;
@@ -141,7 +141,7 @@ public class CircularProgressBar extends View {
         mCircleBounds.bottom = halfViewHeight + halfBoundingSquareSide;
 
         // Text Size
-        mTextSize = minDimension * TEXT_SIZE_RATIO;
+        mTextSize = minDimension * TEXT_SIZE_FRACTION;
     }
 
     public float getValue() {
