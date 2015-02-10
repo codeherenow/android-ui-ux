@@ -33,6 +33,7 @@ public class CircularProgressBar extends View {
     private float mStrokeThickness;
     private RectF mCircleBounds;
     private Paint mPaint;
+
     private float mValue;
     private float mMaxValue;
 
@@ -108,6 +109,9 @@ public class CircularProgressBar extends View {
         return mMaxValue;
     }
 
+    /*
+     * Call invalidate() to redraw the view. We do this when the max value changes.
+     */
     public void setMaxValue(float maxValue) {
         this.mMaxValue = maxValue;
         invalidate();
@@ -117,6 +121,9 @@ public class CircularProgressBar extends View {
         return mValue;
     }
 
+    /*
+     * Call invalidate() to redraw the view. We do this when the value changes.
+     */
     public void setValue(float value) {
         this.mValue = value;
         invalidate();
