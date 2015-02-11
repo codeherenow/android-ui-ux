@@ -21,4 +21,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // You'll need the v4 support library for the Navigation Drawer
+    compile 'com.android.support:support-v4:21.0.+'
 }
