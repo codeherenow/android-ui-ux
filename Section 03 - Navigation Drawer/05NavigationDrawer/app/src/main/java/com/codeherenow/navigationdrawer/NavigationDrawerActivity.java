@@ -57,7 +57,7 @@ public class NavigationDrawerActivity extends ActionBarActivity implements Adapt
         }
 
         // Initialize the ListView
-        ArrayAdapter<String> websitesAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<String> websitesAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.websites));
         mDrawerListView.setAdapter(websitesAdapter);
