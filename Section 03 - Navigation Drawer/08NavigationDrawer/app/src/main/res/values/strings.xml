@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Navigation Drawer</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_closed">Drawer closed</string>
+
+    <string-array name="websites">
+        <item>Google+</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Github</item>
+        <item>YouTube</item>
+        <item>Dribbble</item>
+        <item>Vimeo</item>
+    </string-array>
+</resources>

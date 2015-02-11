@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".NavigationDrawerActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_alignParentTop="true"/>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Content Layout -->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/include_navigation_drawer_content"/>
+
+        <!-- Drawer Layout -->
+        <!--
+            NOTE: If you are going to specify the "layout_width" in dps, then do not
+            exceed 320dp
+        -->
+        <ListView
+            android:id="@+id/drawerListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white"/>
+
+    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
