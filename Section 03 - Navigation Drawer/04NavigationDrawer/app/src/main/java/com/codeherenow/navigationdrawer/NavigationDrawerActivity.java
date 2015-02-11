@@ -21,13 +21,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class NavigationDrawerActivity extends Activity {
+public class NavigationDrawerActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -57,6 +61,9 @@ public class NavigationDrawerActivity extends Activity {
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.websites));
         mDrawerListView.setAdapter(websitesAdapter);
+
+        // Event listeners
+        mDrawerListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -92,5 +99,27 @@ public class NavigationDrawerActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Show a toast
+        Adapter adapter = parent.getAdapter();
+        String website = adapter.getItem(position).toString();
+        Toast.makeText(this, website, Toast.LENGTH_SHORT).show();
+
+        // Dismiss the drawer
+        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
+            mDrawerLayout.closeDrawer(mDrawerListView);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
+            mDrawerLayout.closeDrawer(mDrawerListView);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
