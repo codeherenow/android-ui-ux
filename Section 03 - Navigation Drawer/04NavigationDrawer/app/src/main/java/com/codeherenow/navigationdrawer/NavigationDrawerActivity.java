@@ -31,7 +31,8 @@ import android.widget.Toast;
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class NavigationDrawerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class NavigationDrawerActivity extends Activity
+        implements AdapterView.OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;

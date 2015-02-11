@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,8 @@ import android.widget.Toast;
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class NavigationDrawerActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class NavigationDrawerActivity extends ActionBarActivity
+        implements AdapterView.OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -43,11 +45,15 @@ public class NavigationDrawerActivity extends ActionBarActivity implements Adapt
         setContentView(R.layout.activity_navigation_drawer);
 
         // UI References
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
 
+        // Set the toolbar
+        setSupportActionBar(toolbar);
+
         // Initialize the Drawer
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_closed);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         ActionBar actionBar = getSupportActionBar();
