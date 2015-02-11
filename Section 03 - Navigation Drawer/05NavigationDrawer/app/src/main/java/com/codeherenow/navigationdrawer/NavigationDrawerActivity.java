@@ -13,11 +13,11 @@
  */
 package com.codeherenow.navigationdrawer;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import android.widget.Toast;
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class NavigationDrawerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class NavigationDrawerActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -50,7 +50,7 @@ public class NavigationDrawerActivity extends Activity implements AdapterView.On
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
