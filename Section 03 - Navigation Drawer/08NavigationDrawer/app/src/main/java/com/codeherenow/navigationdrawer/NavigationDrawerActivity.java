@@ -45,7 +45,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         setContentView(R.layout.activity_navigation_drawer);
 
         // UI References
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
 
@@ -54,7 +54,23 @@ public class NavigationDrawerActivity extends ActionBarActivity
 
         // Initialize the Drawer
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
-                R.string.drawer_open, R.string.drawer_closed);
+                R.string.drawer_open, R.string.drawer_closed) {
+
+            // Override the `onDrawerOpened()` and the `onDrawerClosed()` methods of
+            // `ActionBarDrawerToggle` and then update the title inside the callbacks.
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                toolbar.setTitle(R.string.websites);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                toolbar.setTitle(R.string.app_name);
+            }
+        };
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
