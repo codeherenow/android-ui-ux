@@ -27,6 +27,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -38,6 +39,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerListView;
+    private RelativeLayout mRightDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
+        mRightDrawer = (RelativeLayout) findViewById(R.id.rightDrawer);
 
         // Set the toolbar
         setSupportActionBar(toolbar);
@@ -124,6 +127,8 @@ public class NavigationDrawerActivity extends ActionBarActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
             mDrawerLayout.closeDrawer(mDrawerListView);
+        } else if (mDrawerLayout.isDrawerOpen(mRightDrawer)) {
+            mDrawerLayout.closeDrawer(mRightDrawer);
         } else {
             super.onBackPressed();
         }
