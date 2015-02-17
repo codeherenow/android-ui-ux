@@ -58,9 +58,9 @@ public class NavigationDrawerActivity extends Activity
         }
 
         // Initialize the ListView
+        String[] websites = getResources().getStringArray(R.array.websites);
         ArrayAdapter<String> websitesAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.websites));
+                android.R.layout.simple_list_item_1, websites);
         mDrawerListView.setAdapter(websitesAdapter);
 
         // Event listeners
