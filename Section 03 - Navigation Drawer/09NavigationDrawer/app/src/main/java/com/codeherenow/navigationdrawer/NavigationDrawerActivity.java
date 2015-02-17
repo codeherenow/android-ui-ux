@@ -39,7 +39,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerListView;
-    private RelativeLayout mRightDrawer;
+    private RelativeLayout mDrawerShareLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
-        mRightDrawer = (RelativeLayout) findViewById(R.id.rightDrawer);
+        mDrawerShareLayout = (RelativeLayout) findViewById(R.id.drawerShareLayout);
 
         // Set the toolbar
         setSupportActionBar(toolbar);
@@ -96,18 +96,21 @@ public class NavigationDrawerActivity extends ActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        boolean actionHandled = false;
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        } else if (id == R.id.action_settings) {
-            return true;
+            actionHandled = true;
+        } else if (id == R.id.action_share) {
+            if (mDrawerLayout.isDrawerOpen(mDrawerShareLayout)) {
+                mDrawerLayout.closeDrawer(mDrawerShareLayout);
+            } else {
+                mDrawerLayout.openDrawer(mDrawerShareLayout);
+            }
+            actionHandled = true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return actionHandled || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -127,8 +130,8 @@ public class NavigationDrawerActivity extends ActionBarActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
             mDrawerLayout.closeDrawer(mDrawerListView);
-        } else if (mDrawerLayout.isDrawerOpen(mRightDrawer)) {
-            mDrawerLayout.closeDrawer(mRightDrawer);
+        } else if (mDrawerLayout.isDrawerOpen(mDrawerShareLayout)) {
+            mDrawerLayout.closeDrawer(mDrawerShareLayout);
         } else {
             super.onBackPressed();
         }
