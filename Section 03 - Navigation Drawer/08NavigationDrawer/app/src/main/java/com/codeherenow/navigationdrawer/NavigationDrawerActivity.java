@@ -52,7 +52,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         // Set the toolbar
         setSupportActionBar(toolbar);
 
-        // Initialize the Drawer
+        // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_closed) {
 

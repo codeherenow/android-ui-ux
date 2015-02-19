@@ -42,7 +42,7 @@ public class NavigationDrawerActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
 
-        // Initialize the Drawer
+        // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
