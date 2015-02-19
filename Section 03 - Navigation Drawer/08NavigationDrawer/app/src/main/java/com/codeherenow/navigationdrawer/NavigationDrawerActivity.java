@@ -70,13 +70,11 @@ public class NavigationDrawerActivity extends ActionBarActivity
                 toolbar.setTitle(R.string.app_name);
             }
         };
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         // Initialize the ListView
         String[] websites = getResources().getStringArray(R.array.websites);

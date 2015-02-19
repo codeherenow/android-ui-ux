@@ -47,10 +47,8 @@ public class NavigationDrawerActivity extends Activity {
                 R.string.drawer_open, R.string.drawer_closed);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         // Initialize the ListView
         String[] websites = getResources().getStringArray(R.array.websites);
