@@ -45,7 +45,12 @@ public class NavigationDrawerActivity extends Activity {
         // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
+
+        // We need this in order to play the `Menu -> Back` and
+        // `Back -> Menu` icon animation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Show the ActionBarDrawerToggle
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
