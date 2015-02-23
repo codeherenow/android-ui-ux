@@ -27,7 +27,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -39,7 +39,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerListView;
-    private RelativeLayout mDrawerShareLayout;
+    private TextView mShareDrawerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
-        mDrawerShareLayout = (RelativeLayout) findViewById(R.id.drawerShareLayout);
+        mShareDrawerTextView = (TextView) findViewById(R.id.shareDrawerTextView);
 
         // Set the toolbar
         setSupportActionBar(toolbar);
@@ -58,7 +58,6 @@ public class NavigationDrawerActivity extends ActionBarActivity
         // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_closed);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -100,11 +99,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             actionHandled = true;
         } else if (id == R.id.action_share) {
-            if (mDrawerLayout.isDrawerOpen(mDrawerShareLayout)) {
-                mDrawerLayout.closeDrawer(mDrawerShareLayout);
-            } else {
-                mDrawerLayout.openDrawer(mDrawerShareLayout);
-            }
+            mDrawerLayout.openDrawer(mShareDrawerTextView);
             actionHandled = true;
         }
 
@@ -126,10 +121,11 @@ public class NavigationDrawerActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
-            mDrawerLayout.closeDrawer(mDrawerListView);
-        } else if (mDrawerLayout.isDrawerOpen(mDrawerShareLayout)) {
-            mDrawerLayout.closeDrawer(mDrawerShareLayout);
+        boolean openDrawers = mDrawerLayout.isDrawerOpen(mDrawerListView) ||
+                mDrawerLayout.isDrawerOpen(mShareDrawerTextView);
+
+        if (openDrawers) {
+            mDrawerLayout.closeDrawers();
         } else {
             super.onBackPressed();
         }
