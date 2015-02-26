@@ -125,11 +125,11 @@ public class CircularProgressBar extends View {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Stroke Width
-        int minDimension = Math.min(w, h);
-        mStrokeThickness = minDimension * STROKE_THICKNESS_FRACTION;
+        int diameter = Math.min(w, h);
+        mStrokeThickness = diameter * STROKE_THICKNESS_FRACTION;
 
         // Square
-        float boundingSquareSide = minDimension - mStrokeThickness;
+        float boundingSquareSide = diameter - mStrokeThickness;
         float halfViewWidth = w / 2;
         float halfViewHeight = h / 2;
         float halfBoundingSquareSide = boundingSquareSide / 2;
@@ -141,7 +141,7 @@ public class CircularProgressBar extends View {
         mCircleBounds.bottom = halfViewHeight + halfBoundingSquareSide;
 
         // Text Size
-        mTextSize = minDimension * TEXT_SIZE_FRACTION;
+        mTextSize = diameter * TEXT_SIZE_FRACTION;
     }
 
     public float getValue() {

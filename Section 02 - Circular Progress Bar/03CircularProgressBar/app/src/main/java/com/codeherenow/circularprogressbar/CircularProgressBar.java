@@ -74,12 +74,12 @@ public class CircularProgressBar extends View {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Stroke Width
-        int minDimension = Math.min(w, h);
-        mStrokeThickness = minDimension * STROKE_THICKNESS_FRACTION;
+        int diameter = Math.min(w, h);
+        mStrokeThickness = diameter * STROKE_THICKNESS_FRACTION;
         float halfOfStrokeThickness = mStrokeThickness / 2;
 
         // Circle & Arc Bounds
         mCircleBounds.left = mCircleBounds.top = halfOfStrokeThickness;
-        mCircleBounds.right = mCircleBounds.bottom = minDimension - halfOfStrokeThickness;
+        mCircleBounds.right = mCircleBounds.bottom = diameter - halfOfStrokeThickness;
     }
 }
