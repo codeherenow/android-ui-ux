@@ -14,7 +14,6 @@
 package com.codeherenow.circularprogressbar;
 
 import android.content.Context;
-import android.graphics.RectF;
 import android.view.View;
 
 /**
@@ -26,7 +25,6 @@ public class CircularProgressBar extends View {
 
     // Attributes
     private float mStrokeThickness;
-    private RectF mCircleBounds;
 
     /*
      * We need to override at least one of the constructors. Here, we override the simplest of all.
@@ -34,7 +32,6 @@ public class CircularProgressBar extends View {
      */
     public CircularProgressBar(Context context) {
         super(context);
-        mCircleBounds = new RectF();
     }
 
     /**
@@ -49,9 +46,5 @@ public class CircularProgressBar extends View {
         // Stroke Width
         int minDimension = Math.min(w, h);
         mStrokeThickness = minDimension * STROKE_THICKNESS_FRACTION;
-
-        // Circle & Arc Bounds
-        mCircleBounds.left = mCircleBounds.top = 0;
-        mCircleBounds.right = mCircleBounds.bottom = minDimension;
     }
 }
