@@ -40,7 +40,9 @@ public class CircularProgressBar extends View {
     public CircularProgressBar(Context context) {
         super(context);
         mCircleBounds = new RectF();
+
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStrokeWidth(mStrokeThickness);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
     }
@@ -52,7 +54,6 @@ public class CircularProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mPaint.setStrokeWidth(mStrokeThickness);
 
         // Background
         mPaint.setColor(COLOR_DEFAULT_BACKGROUND);
