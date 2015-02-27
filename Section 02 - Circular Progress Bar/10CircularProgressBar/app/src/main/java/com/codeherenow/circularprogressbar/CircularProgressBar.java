@@ -109,12 +109,12 @@ public class CircularProgressBar extends View {
 
         // Background
         mPaint.setColor(mBarBackgroundColor);
-        canvas.drawArc(mCircleBounds, 0, 360, false, mPaint);
+        canvas.drawOval(mCircleBounds, mPaint);
 
         // Foreground
         mPaint.setColor(mBarForegroundColor);
         float sweepAngle = mValue / MAX_VALUE * 360;
-        canvas.drawArc(mCircleBounds, 0, sweepAngle, false, mPaint);
+        canvas.drawOval(mCircleBounds, mPaint);
 
         // Text
         mPaint.setTextSize(mTextSize);

@@ -67,11 +67,11 @@ public class CircularProgressBar extends View {
 
         // Background
         mPaint.setColor(COLOR_DEFAULT_BACKGROUND);
-        canvas.drawArc(mCircleBounds, 0, 360, false, mPaint);
+        canvas.drawOval(mCircleBounds, mPaint);
 
         // Foreground
         mPaint.setColor(COLOR_DEFAULT_FOREGROUND);
-        canvas.drawArc(mCircleBounds, 0, 120, false, mPaint);
+        canvas.drawOval(mCircleBounds, mPaint);
     }
 
     /**
