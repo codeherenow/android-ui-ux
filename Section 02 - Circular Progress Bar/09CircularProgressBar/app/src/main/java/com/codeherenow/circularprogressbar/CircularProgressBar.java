@@ -137,16 +137,16 @@ public class CircularProgressBar extends View {
         mStrokeThickness = diameter * STROKE_THICKNESS_FRACTION;
 
         // Square
+        float centerX = w / 2;
+        float centerY = h / 2;
         float boundingSquareSide = diameter - mStrokeThickness;
-        float halfViewWidth = w / 2;
-        float halfViewHeight = h / 2;
         float halfBoundingSquareSide = boundingSquareSide / 2;
 
         // Circle & Arc Bounds
-        mCircleBounds.left = halfViewWidth - halfBoundingSquareSide;
-        mCircleBounds.top = halfViewHeight - halfBoundingSquareSide;
-        mCircleBounds.right = halfViewWidth + halfBoundingSquareSide;
-        mCircleBounds.bottom = halfViewHeight + halfBoundingSquareSide;
+        mCircleBounds.left = centerX - halfBoundingSquareSide;
+        mCircleBounds.top = centerY - halfBoundingSquareSide;
+        mCircleBounds.right = centerX + halfBoundingSquareSide;
+        mCircleBounds.bottom = centerY + halfBoundingSquareSide;
 
         // Text Size
         mTextSize = diameter * TEXT_SIZE_FRACTION;
