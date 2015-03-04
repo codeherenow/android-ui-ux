@@ -15,6 +15,7 @@ package com.codeherenow.circularprogressbar;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -171,10 +172,10 @@ public class CircularProgressBar extends View {
      * Set a color supplier instance that would get colors for the given value.
      */
     public void setColorSupplier(ColorSupplier colorSupplier) {
+        this.mColorSupplier = colorSupplier;
         if (colorSupplier != null && mColorAnimator == null) {
             initColorAnimator(colorSupplier);
         }
-        this.mColorSupplier = colorSupplier;
     }
 
     private void obtainXmlAttributes(Context context, AttributeSet attributeSet) {
@@ -199,6 +200,7 @@ public class CircularProgressBar extends View {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void initProgressValueAnimator() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             mValueAnimator = ValueAnimator.ofFloat(0, mValue);
@@ -221,6 +223,7 @@ public class CircularProgressBar extends View {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void initColorAnimator(ColorSupplier colorSupplier) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
@@ -235,6 +238,7 @@ public class CircularProgressBar extends View {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void startAnimation(float value) {
         if (mValueAnimator.isRunning()) {
             mValueAnimator.cancel();
