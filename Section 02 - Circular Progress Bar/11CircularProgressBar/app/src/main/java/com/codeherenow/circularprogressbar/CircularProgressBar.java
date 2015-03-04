@@ -116,8 +116,8 @@ public class CircularProgressBar extends View {
         canvas.drawOval(mCircleBounds, mPaint);
 
         // Foreground
-        mPaint.setColor(mColorSupplier == null
-                ? mBarForegroundColor : mBarSuppliedForegroundColor);
+        mPaint.setColor(mColorSupplier != null
+                ? mBarSuppliedForegroundColor : mBarForegroundColor);
         float sweepAngle = mValue / MAX_VALUE * 360;
         canvas.drawArc(mCircleBounds, 0, sweepAngle, false, mPaint);
 
@@ -179,6 +179,7 @@ public class CircularProgressBar extends View {
      * Set a color supplier instance that would get colors for the given value.
      */
     public void setColorSupplier(ColorSupplier colorSupplier) {
+        this.mColorSupplier = colorSupplier;
         if (colorSupplier != null && mColorAnimator == null) {
             mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
                     mBarForegroundColor, colorSupplier.getColor(mValue));
@@ -189,8 +190,9 @@ public class CircularProgressBar extends View {
                     mBarSuppliedForegroundColor = (int) animation.getAnimatedValue();
                 }
             });
+        } else if (colorSupplier == null) {
+            mColorAnimator = null;
         }
-        this.mColorSupplier = colorSupplier;
     }
 
     private void obtainXmlAttributes(Context context, AttributeSet attributeSet) {
