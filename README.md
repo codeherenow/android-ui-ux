@@ -1,7 +1,8 @@
 # Android UIs: Building Stylish &amp; Beautiful Apps with Lollipop
 Source Code for [Android UI Development Course] on Udemy.
 
-#Table of Contents
+Contents
+--------
 1. [Using Navigation Drawers] - 50 mins
   * Learn what Navigation Drawers are and how to use them in your Android applications.
 
