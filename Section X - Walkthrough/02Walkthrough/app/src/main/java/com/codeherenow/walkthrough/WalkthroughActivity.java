@@ -13,18 +13,31 @@
  */
 package com.codeherenow.walkthrough;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 
 
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class WalkthroughActivity extends Activity {
+public class WalkthroughActivity extends ActionBarActivity {
+
+    // UI References
+    private ViewPager mWalkthroughViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walkthrough);
+
+        // Get references
+        mWalkthroughViewPager = (ViewPager) findViewById(R.id.walkthroughViewPager);
+
+        // Set adapter
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        WalkthroughPagerAdapter adapter = new WalkthroughPagerAdapter(fragmentManager);
+        mWalkthroughViewPager.setAdapter(adapter);
     }
 }
