@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- We are using the AppCompat theme as a parent, because it plays
+         well with the Material theme. -->
+    <style name="WalkthroughTheme" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>
