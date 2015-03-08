@@ -24,4 +24,5 @@ dependencies {
 
     // You'll need the v4 support library for the Navigation Drawer
     compile 'com.android.support:support-v4:21.0.+'
+    compile 'com.android.support:appcompat-v7:21.0.+'
 }

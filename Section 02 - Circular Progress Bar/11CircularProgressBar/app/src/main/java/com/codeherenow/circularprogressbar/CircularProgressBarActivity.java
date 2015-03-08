@@ -15,9 +15,6 @@ package com.codeherenow.circularprogressbar;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-
-import java.util.Random;
 
 /**
  * This is an example on creating custom views for Android.
@@ -26,47 +23,9 @@ import java.util.Random;
  */
 public class CircularProgressBarActivity extends Activity {
 
-    private Random mRandom;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_circular_progress_bar);
-        mRandom = new Random();
-
-        final CircularProgressBar circularProgressBar =
-                (CircularProgressBar) findViewById(R.id.circularProgressBar);
-        circularProgressBar.setColorSupplier(new MyColorSupplier());
-
-        // Event Listener
-        circularProgressBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int value = mRandom.nextInt(101);
-                circularProgressBar.setValue(value);
-            }
-        });
-    }
-
-    /*
-     * This is our implementation of the `ColorSupplier`. We supply 4 different colors
-     * for 4 different ranges.
-     */
-    static class MyColorSupplier implements CircularProgressBar.ColorSupplier {
-
-        @Override
-        public int getColor(float value) {
-            int color;
-            if (value <= 30) {
-                color = 0xfff44224;
-            } else if (value <= 60) {
-                color = 0xffffb74c;
-            } else if (value <= 85) {
-                color = 0xff6a8afe;
-            } else {
-                color = 0xff42bd41;
-            }
-            return color;
-        }
     }
 }

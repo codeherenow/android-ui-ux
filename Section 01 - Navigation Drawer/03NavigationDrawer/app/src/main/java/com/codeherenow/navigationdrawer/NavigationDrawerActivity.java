@@ -21,13 +21,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * @author Ragunath Jawahar <www.codeherenow.com>
  */
-public class NavigationDrawerActivity extends Activity {
+public class NavigationDrawerActivity extends Activity
+        implements AdapterView.OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -45,12 +50,7 @@ public class NavigationDrawerActivity extends Activity {
         // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_closed);
-
-        // We need this in order to play the `Menu -> Back` and
-        // `Back -> Menu` icon animation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // Show the ActionBarDrawerToggle
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -60,6 +60,9 @@ public class NavigationDrawerActivity extends Activity {
         ArrayAdapter<String> websitesAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, websites);
         mDrawerListView.setAdapter(websitesAdapter);
+
+        // Event listeners
+        mDrawerListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -95,5 +98,27 @@ public class NavigationDrawerActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Show a toast
+        Adapter adapter = parent.getAdapter();
+        String website = adapter.getItem(position).toString();
+        Toast.makeText(this, website, Toast.LENGTH_SHORT).show();
+
+        // Dismiss the drawer
+        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
+            mDrawerLayout.closeDrawer(mDrawerListView);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
+            mDrawerLayout.closeDrawer(mDrawerListView);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

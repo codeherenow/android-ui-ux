@@ -27,6 +27,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -38,6 +39,7 @@ public class NavigationDrawerActivity extends ActionBarActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerListView;
+    private TextView mShareDrawerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +47,17 @@ public class NavigationDrawerActivity extends ActionBarActivity
         setContentView(R.layout.activity_navigation_drawer);
 
         // UI References
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerListView = (ListView) findViewById(R.id.drawerListView);
+        mShareDrawerTextView = (TextView) findViewById(R.id.shareDrawerTextView);
 
         // Set the toolbar
         setSupportActionBar(toolbar);
 
         // Initialize the Drawer Toggle
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
-                R.string.drawer_open, R.string.drawer_closed) {
-
-            // Override the `onDrawerOpened()` and the `onDrawerClosed()` methods of
-            // `ActionBarDrawerToggle` and then update the title inside the callbacks.
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                toolbar.setTitle(R.string.websites);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                toolbar.setTitle(R.string.app_name);
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+                R.string.drawer_open, R.string.drawer_closed);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -107,18 +93,17 @@ public class NavigationDrawerActivity extends ActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        boolean actionHandled = false;
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        } else if (id == R.id.action_settings) {
-            return true;
+            actionHandled = true;
+        } else if (id == R.id.action_share) {
+            mDrawerLayout.openDrawer(mShareDrawerTextView);
+            actionHandled = true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return actionHandled || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -136,8 +121,11 @@ public class NavigationDrawerActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(mDrawerListView)) {
-            mDrawerLayout.closeDrawer(mDrawerListView);
+        boolean openDrawers = mDrawerLayout.isDrawerOpen(mDrawerListView) ||
+                mDrawerLayout.isDrawerOpen(mShareDrawerTextView);
+
+        if (openDrawers) {
+            mDrawerLayout.closeDrawers();
         } else {
             super.onBackPressed();
         }
