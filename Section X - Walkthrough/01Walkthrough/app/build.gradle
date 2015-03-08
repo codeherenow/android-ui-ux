@@ -21,6 +21,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // The v4 support library contains the ViewPager
     compile 'com.android.support:support-v4:21.0.+'
+
+    // AppCompat v7 provides the AppCompat Theme
     compile 'com.android.support:appcompat-v7:21.0.+'
 }
