@@ -6,7 +6,7 @@ This section teaches you about integrating drawers to your application using the
 
 Contents
 --------
-[01 Integrating a navigation drawer to your Activity](/01NavigationDrawer)
+[01 Integrating a navigation drawer to your Activity](https://github.com/codeherenow/android-uis/tree/master/Section%2001%20-%20Navigation%20Drawer/01NavigationDrawer)
   * Use a `DrawerLayout` to add a navigation drawer that slides in from the left of the `Activity`.
 
 [02 Summoning the drawer using a "Hamburger" menu button](https://github.com/codeherenow/android-uis/tree/master/Section%2001%20-%20Navigation%20Drawer/02NavigationDrawer)
