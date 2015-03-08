@@ -1,6 +1,8 @@
 # Android UIs: Building Stylish &amp; Beautiful Apps with Lollipop
 Source Code for [Android UIs: Building Stylish & Beautiful Apps with Lollipop] course on Udemy.
 
+![Artwork](/Artwork/Cover Image.png)
+
 Contents
 --------
 1. [Using Navigation Drawers] - 50 mins
